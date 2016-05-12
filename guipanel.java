@@ -9,8 +9,6 @@ public class guipanel extends JPanel
    private static final int DELAY = 100;
    private static boolean go;
    private static int size = 10; // Size of a cell
-   private ImageIcon blank = new ImageIcon("blank.png");
-   private ImageIcon black = new ImageIcon("black.png");
    public guipanel()
    {
       int r = 50;
@@ -38,8 +36,9 @@ public class guipanel extends JPanel
          x = 0;
          for (int c = 0; c < con.numColumns(); c++)
          {
-            if(l[r][c] != null) g.drawImage(black.getImage(),x,y,size,size,null);
-            else g.drawImage(blank.getImage(),x,y,size,size,null);
+            if(l[r][c] != null) g.setColor(Color.BLACK);
+            else g.setColor(Color.WHITE);
+            g.fillRect(x,y,size,size);
             x+=size;
          }
          y+=size;
