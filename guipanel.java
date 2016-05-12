@@ -8,7 +8,7 @@ public class guipanel extends JPanel
    private Timer t;
    private static final int DELAY = 100;
    private static boolean go;
-   private static Point size = new Point(10,10); // Size of a cell
+   private static Dimension size = new Dimension(10,10); // Size of a cell
    public guipanel()
    {
       int r = 50;
@@ -22,7 +22,7 @@ public class guipanel extends JPanel
    }
    private void setup(int r, int c)
    {
-     
+   
    }
    @Override
    public void paintComponent(Graphics g)
@@ -38,10 +38,10 @@ public class guipanel extends JPanel
          {
             if(l[r][c] != null) g.setColor(Color.BLACK);
             else g.setColor(Color.WHITE);
-            g.fillRect(x,y,size.x,size.y);
-            x+=size.x;
+            g.fillRect(x,y,size.width,size.height);
+            x+=size.width;
          }
-         y+=size.y;
+         y+=size.height;
       }
    }
    private class Listener implements ActionListener
@@ -72,16 +72,16 @@ public class guipanel extends JPanel
             concommon.toFile(con,s);
          }
          // Add shift to change Y
-         else if (c == '=') size.x++;
-         else if (c == '+') size.y++;
-         else if (c == '-') size.x--;
-         else if (c == '_') size.y--;
+         else if (c == '=') size.width++;
+         else if (c == '+') size.height++;
+         else if (c == '-') size.width--;
+         else if (c == '_') size.height--;
          else if (c == ' ') go = !go;
    }
    public void processmouse(Point p,int b)
    {
-      int mouseR = (int)(p.getY()/size.y);
-      int mouseC = (int)(p.getX()/size.x);
+      int mouseR = (int)(p.getY()/size.height);
+      int mouseC = (int)(p.getX()/size.width);
       if (b == 1) con.set(mouseR,mouseC,new life());
       else if (b == 3) con.set(mouseR,mouseC,null);
       System.out.println(mouseR+" "+mouseC);
