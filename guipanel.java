@@ -5,7 +5,6 @@ import java.awt.event.*;
 public class guipanel extends JPanel
 {
    private static Conways con;
-   private static guilife[][] gl;
    private Timer t;
    private static final int DELAY = 100;
    private static boolean go;
