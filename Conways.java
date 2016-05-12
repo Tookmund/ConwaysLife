@@ -82,7 +82,6 @@ public class Conways
          {
             if (rand.nextInt(10) > 5) 
             {
-               //System.out.println("Life at "+r+","+c);
                set(r,c,new life());
             }
          }
