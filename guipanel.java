@@ -8,7 +8,7 @@ public class guipanel extends JPanel
    private Timer t;
    private static final int DELAY = 100;
    private static boolean go;
-   private static int size = 10; // Size of a cell
+   private static Point size = new Point(10,10); // Size of a cell
    public guipanel()
    {
       int r = 50;
@@ -38,10 +38,10 @@ public class guipanel extends JPanel
          {
             if(l[r][c] != null) g.setColor(Color.BLACK);
             else g.setColor(Color.WHITE);
-            g.fillRect(x,y,size,size);
-            x+=size;
+            g.fillRect(x,y,size.x,size.y);
+            x+=size.x;
          }
-         y+=size;
+         y+=size.y;
       }
    }
    private class Listener implements ActionListener
@@ -71,14 +71,17 @@ public class guipanel extends JPanel
             String s = JOptionPane.showInputDialog("Write to File");
             concommon.toFile(con,s);
          }
-         else if (c == '+') size ++;
-         else if (c == '-') size --;
+         // Add shift to change Y
+         else if (c == '=') size.x++;
+         else if (c == '+') size.y++;
+         else if (c == '-') size.x--;
+         else if (c == '_') size.y--;
          else if (c == ' ') go = !go;
    }
    public void processmouse(Point p,int b)
    {
-      int mouseR = (int)(p.getY()/size);
-      int mouseC = (int)(p.getX()/size);
+      int mouseR = (int)(p.getY()/size.y);
+      int mouseC = (int)(p.getX()/size.x);
       if (b == 1) con.set(mouseR,mouseC,new life());
       else if (b == 3) con.set(mouseR,mouseC,null);
       System.out.println(mouseR+" "+mouseC);
