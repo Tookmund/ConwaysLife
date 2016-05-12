@@ -19,4 +19,8 @@ public class guilife extends JPanel
       if (living) setBackground(Color.BLACK);
       else setBackground(Color.WHITE);
    }
+   public void clicked()
+   {
+      living = !living;
+   }
 }

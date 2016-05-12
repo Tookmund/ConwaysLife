@@ -11,10 +11,11 @@ public class gui
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       gp = new guipanel();
       frame.setContentPane(gp);
-      frame.addKeyListener(new listen());
+      frame.addKeyListener(new keylisten());
+      frame.addMouseListener(new mouselisten());
       frame.setVisible(true);
    }
-   public static class listen implements KeyListener 
+   public static class keylisten implements KeyListener 
    {
       public void keyTyped(KeyEvent e) { }
          
@@ -24,6 +25,27 @@ public class gui
       {
          gp.processkeys(e.getKeyChar());
       }
+   }
+   public static class mouselisten implements MouseListener
+   {
+      public void mouseClicked(MouseEvent e) { }
+      public void	mouseEntered(MouseEvent e) { }
+      public void	mouseExited(MouseEvent e)  { }
+      public void	mousePressed(MouseEvent e) { }
+      public void	mouseReleased(MouseEvent e)
+      {
+         gp.processmouse(e.getPoint(),e.getButton());
+      }
+   }
+   public static class componentlisten implements ComponentListener
+   {
+      public void	componentHidden(ComponentEvent e) { }
+      public void	componentMoved(ComponentEvent e)  { }
+      public void	componentResized(ComponentEvent e)
+      {
+         gp.resized();
+      }
+      public void	componentShown(ComponentEvent e)  { }
    }
 
 }
