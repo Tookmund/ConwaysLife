@@ -7,7 +7,8 @@ import java.io.IOException;
 public class Conways 
 {
    private Matrixable<life> board;
-   
+   private boolean wraparound = true;
+
    public Conways(int r, int c)
    {
       board = new SparseMatrix<life>(r,c);
@@ -26,7 +27,12 @@ public class Conways
          }
       }
    }
-   public int livingNeighbors(Matrixable<life> b,int r,int c)
+   public void wrap() { wraparound = !wraparound; }
+   public int getNeighbors(int r, int c)
+   {
+      return livingNeighbors(board,r,c);
+   }
+   private int livingNeighbors(Matrixable<life> b,int r,int c)
    {
       // Check all eight neighbors
       int total = 0;
@@ -36,16 +42,33 @@ public class Conways
       int[] cols = {c-1,c,c+1};
       // If there is nothing to the left check to the right
       // and vice versa
-      if (rows[0] < 0) rows[0] = b.numRows()-1;
-      if (rows[2] >= b.numRows()) rows[2] = 0;
-      if (cols[0] < 0) cols[0] = b.numColumns()-1;
-      if (cols[2] >= b.numRows()) cols[2] = 0;
+      if (rows[0] < 0) 
+      {
+         if (wraparound) rows[0] = b.numRows()-1;
+         else rows[0] = -1;
+      }
+      if (rows[2] >= b.numRows()) 
+      {
+         if (wraparound) rows[2] = 0;
+         else rows[2] = -1;
+      }
+      if (cols[0] < 0) 
+      {
+         if (wraparound) cols[0] = b.numColumns()-1;
+         else cols[0] = -1;
+      }
+      if (cols[2] >= b.numRows()) 
+      {
+         if(wraparound) cols[2] = 0;
+         else cols[2] = -1;
+      }
       life l;
       for (int i = 0; i < rows.length; i++)
       {
          for (int j = 0; j < cols.length; j++)
          {
-            l = b.get(rows[i],cols[j]);
+            if (rows[i] != -1 && cols[i] != -1) l = b.get(rows[i],cols[j]);
+            else continue;
             if (l != null) 
             {
             if (rows[i] == r && cols[j] == c) continue;
