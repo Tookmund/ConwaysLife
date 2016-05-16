@@ -113,7 +113,7 @@ public class Conways
    public String toString() { return board.toString(); }
    public int numRows() { return board.numRows(); }
    public int numColumns() { return board.numColumns(); }
-   public void set(int r, int c, life l) { board.set(r,c,l); }
-   public Object[][] toArray() { return board.toArray(); }
+   public life set(int r, int c, life l) { return board.set(r,c,l); }
+   public life get(int r, int c) { return board.get(r,c); }
    public void clear() { board.clear(); }
 }
