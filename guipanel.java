@@ -8,11 +8,15 @@ public class guipanel extends JPanel
    private Timer t;
    private static final int DELAY = 100;
    private static boolean go;
-   private static Dimension size = new Dimension(10,10); // Size of a cell
+   //private static Dimension size = new Dimension(10,10); // Size of a cell
+   private static Dimension size;
+   private static int playerR;			//start row for the player
+   private static int playerC;			//start col for the player
    public guipanel()
    {
       int r = 50;
       int c = 50;
+      size = new Dimension(10,10);
       t = new Timer(DELAY, new Listener());
       con = new Conways(r,c);
       con.populate();
@@ -49,6 +53,8 @@ public class guipanel extends JPanel
                else g.setColor(Color.WHITE);
             }
             g.fillRect(x,y,size.width,size.height);
+            
+            
             x+=size.width;
          }
          y+=size.height;
@@ -82,6 +88,7 @@ public class guipanel extends JPanel
             concommon.toFile(con,s);
          }
          else if (c == 'p') con.wrap();
+         else if (c == 'l') con.clear();
          // Add shift to change Y
          else if (c == '=') size.width++;
          else if (c == '+') size.height++;
@@ -90,13 +97,27 @@ public class guipanel extends JPanel
          
          else if (c == ' ') go = !go;
    }
-   public void processmouse(Point p,int b)
+   public void processmouse(MouseEvent e)
    {
-      int mouseR = p.y/size.height;
-      int mouseC = p.x/size.width;
-      if (b == 1) con.set(mouseR,mouseC,new life());
-      else if (b == 3) con.set(mouseR,mouseC,null);
+      int mouseR = (e.getY()/size.width);
+      int mouseC = (e.getX()/size.height);
+      
+      if(mouseR >=0 && mouseC >= 0 && mouseR < con.numRows() && mouseC < con.numColumns())
+      {
+         if (e.getButton() == 1) con.set(mouseR,mouseC,new life());
+         else if (e.getButton() == 3) con.set(mouseR,mouseC,null);
+      }
       System.out.println(mouseR+" "+mouseC);
+   }
+   public void mouseMoved(MouseEvent e)
+   {
+      int mouseR = (e.getY()/size.width);
+      int mouseC = (e.getX()/size.height);
+      if(mouseR >=0 && mouseC >= 0 && mouseR < con.numRows() && mouseC < con.numColumns())
+      {
+         playerR = mouseR;
+         playerC = mouseC;
+      }
    }
    public void resized()
    {

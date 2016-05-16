@@ -115,4 +115,5 @@ public class Conways
    public int numColumns() { return board.numColumns(); }
    public void set(int r, int c, life l) { board.set(r,c,l); }
    public Object[][] toArray() { return board.toArray(); }
+   public void clear() { board.clear(); }
 }

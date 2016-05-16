@@ -34,7 +34,7 @@ public class gui
       public void	mousePressed(MouseEvent e) { }
       public void	mouseReleased(MouseEvent e)
       {
-         gp.processmouse(e.getPoint(),e.getButton());
+         gp.processmouse(e);
       }
    }
    public static class componentlisten implements ComponentListener
