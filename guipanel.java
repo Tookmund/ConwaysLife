@@ -11,6 +11,7 @@ public class guipanel extends JPanel
    private static byte size;           // size of a cell
    private static int playerR;			// start row for the player
    private static int playerC;			// start col for the player
+   private boolean wrap;
    public guipanel()
    {
       int r = 50;
@@ -22,6 +23,7 @@ public class guipanel extends JPanel
       setup(r,c);
       go = false;
       addMouseListener(new mouselisten());
+      wrap = true;
       t.start();
    }
    private void setup(int r, int c)
@@ -56,6 +58,11 @@ public class guipanel extends JPanel
          }
          y+=size;
       }
+      if (!wrap)
+      {
+         g.setColor(Color.MAGENTA);
+         g.drawRect(0,0,size*con.numColumns(),size*con.numRows());
+      }
    }
    private class Listener implements ActionListener
    {
@@ -84,8 +91,8 @@ public class guipanel extends JPanel
             String s = JOptionPane.showInputDialog("Write to File");
             concommon.toFile(con,s);
          }
-         else if (c == 'p') con.wrap();
-         else if (c == 'l') con.clear();
+         else if (c == 'p') wrap = con.wrap();
+         else if (c == 'c') con.clear();
          // Shift doesn't matter
          else if (c == '=' || c == '+') size++;
          else if (c == '-' || c == '_') size--;

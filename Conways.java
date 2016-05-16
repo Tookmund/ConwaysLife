@@ -27,7 +27,11 @@ public class Conways
          }
       }
    }
-   public void wrap() { wraparound = !wraparound; }
+   public boolean wrap() 
+   { 
+      wraparound = !wraparound;
+      return wraparound;
+   }
    public int getNeighbors(int r, int c)
    {
       return livingNeighbors(board,r,c);
