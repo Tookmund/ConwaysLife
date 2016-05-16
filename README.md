@@ -15,3 +15,4 @@ p - Disable/enable wraparound
 l - Clear the board  
 w - Write board to file  
 r - Read board from file  
+n - Generate new random board

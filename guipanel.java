@@ -95,6 +95,12 @@ public class guipanel extends JPanel
          }
          else if (c == 'p') wrap = con.wrap();
          else if (c == 'c') con.clear();
+         else if (c == 'n')
+         {
+            go = false;
+            con.populate();
+            go = true;
+         }
          // Shift doesn't matter
          else if (c == '=' || c == '+') size++;
          else if (c == '-' || c == '_') size--;
