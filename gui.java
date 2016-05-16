@@ -12,7 +12,6 @@ public class gui
       gp = new guipanel();
       frame.setContentPane(gp);
       frame.addKeyListener(new keylisten());
-      
       frame.setVisible(true);
    }
    public static class keylisten implements KeyListener 
@@ -26,15 +25,4 @@ public class gui
          gp.processkeys(e.getKeyChar());
       }
    }
-   public static class componentlisten implements ComponentListener
-   {
-      public void	componentHidden(ComponentEvent e) { }
-      public void	componentMoved(ComponentEvent e)  { }
-      public void	componentResized(ComponentEvent e)
-      {
-         gp.resized();
-      }
-      public void	componentShown(ComponentEvent e)  { }
-   }
-
 }

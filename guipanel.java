@@ -8,8 +8,7 @@ public class guipanel extends JPanel
    private Timer t;
    private static final int DELAY = 100;
    private static boolean go;
-   //private static Dimension size = new Dimension(10,10); // Size of a cell
-   private static Dimension size;
+   private static Dimension size;      // Size of a cell
    private static int playerR;			//start row for the player
    private static int playerC;			//start col for the player
    public guipanel()
@@ -119,9 +118,6 @@ public class guipanel extends JPanel
          playerR = mouseR;
          playerC = mouseC;
       }
-   }
-   public void resized()
-   {
    }
    public static class mouselisten implements MouseListener
    {
