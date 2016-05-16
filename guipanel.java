@@ -20,15 +20,10 @@ public class guipanel extends JPanel
       t = new Timer(DELAY, new Listener());
       con = new Conways(r,c);
       con.populate();
-      setup(r,c);
       go = false;
       addMouseListener(new mouselisten());
       wrap = true;
       t.start();
-   }
-   private void setup(int r, int c)
-   {
-   
    }
    @Override
    public void paintComponent(Graphics g)
@@ -85,7 +80,6 @@ public class guipanel extends JPanel
             repaint();
             con = null;
             con = concommon.fromFile(s);
-            setup(con.numRows(),con.numColumns());
          }
          else if (c == 'w')
          {
@@ -124,7 +118,6 @@ public class guipanel extends JPanel
          if (e.getButton() == 1) con.set(mouseR,mouseC,new life());
          else if (e.getButton() == 3) con.set(mouseR,mouseC,null);
       }
-      System.out.println(mouseR+" "+mouseC);
    }
    public void mouseMoved(MouseEvent e)
    {
