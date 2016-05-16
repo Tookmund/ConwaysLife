@@ -32,7 +32,6 @@ public class guipanel extends JPanel
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
-      Object[][] l = con.toArray();
       int x = 0;
       int y = 0;
       int n = 0;
@@ -42,7 +41,7 @@ public class guipanel extends JPanel
          for (int c = 0; c < con.numColumns(); c++)
          {
             n = con.getNeighbors(r,c);
-            if(l[r][c] != null) 
+            if(con.get(r,c) != null)
             {
                if (n > 3) g.setColor(Color.RED);
                else g.setColor(Color.BLACK);
@@ -53,8 +52,6 @@ public class guipanel extends JPanel
                else g.setColor(Color.WHITE);
             }
             g.fillRect(x,y,size,size);
-            
-            
             x+=size;
          }
          y+=size;
