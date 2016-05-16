@@ -8,14 +8,14 @@ public class guipanel extends JPanel
    private Timer t;
    private static final int DELAY = 100;
    private static boolean go;
-   private static Dimension size;      // Size of a cell
-   private static int playerR;			//start row for the player
-   private static int playerC;			//start col for the player
+   private static byte size;           // size of a cell
+   private static int playerR;			// start row for the player
+   private static int playerC;			// start col for the player
    public guipanel()
    {
       int r = 50;
       int c = 50;
-      size = new Dimension(10,10);
+      size = 10;
       t = new Timer(DELAY, new Listener());
       con = new Conways(r,c);
       con.populate();
@@ -52,12 +52,12 @@ public class guipanel extends JPanel
                if (n == 3) g.setColor(Color.GREEN);
                else g.setColor(Color.WHITE);
             }
-            g.fillRect(x,y,size.width,size.height);
+            g.fillRect(x,y,size,size);
             
             
-            x+=size.width;
+            x+=size;
          }
-         y+=size.height;
+         y+=size;
       }
    }
    private class Listener implements ActionListener
@@ -89,18 +89,15 @@ public class guipanel extends JPanel
          }
          else if (c == 'p') con.wrap();
          else if (c == 'l') con.clear();
-         // Add shift to change Y
-         else if (c == '=') size.width++;
-         else if (c == '+') size.height++;
-         else if (c == '-') size.width--;
-         else if (c == '_') size.height--;
-         
+         // Shift doesn't matter
+         else if (c == '=' || c == '+') size++;
+         else if (c == '-' || c == '_') size--;
          else if (c == ' ') go = !go;
    }
    public static void processmouse(MouseEvent e)
    {
-      int mouseR = (e.getY()/size.width);
-      int mouseC = (e.getX()/size.height);
+      int mouseR = (e.getY()/size);
+      int mouseC = (e.getX()/size);
       
       if(mouseR >=0 && mouseC >= 0 && mouseR < con.numRows() && mouseC < con.numColumns())
       {
@@ -111,8 +108,8 @@ public class guipanel extends JPanel
    }
    public void mouseMoved(MouseEvent e)
    {
-      int mouseR = (e.getY()/size.width);
-      int mouseC = (e.getX()/size.height);
+      int mouseR = (e.getY()/size);
+      int mouseC = (e.getX()/size);
       if(mouseR >=0 && mouseC >= 0 && mouseR < con.numRows() && mouseC < con.numColumns())
       {
          playerR = mouseR;
