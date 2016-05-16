@@ -22,6 +22,7 @@ public class guipanel extends JPanel
       con.populate();
       setup(r,c);
       go = false;
+      addMouseListener(new mouselisten());
       t.start();
    }
    private void setup(int r, int c)
@@ -97,7 +98,7 @@ public class guipanel extends JPanel
          
          else if (c == ' ') go = !go;
    }
-   public void processmouse(MouseEvent e)
+   public static void processmouse(MouseEvent e)
    {
       int mouseR = (e.getY()/size.width);
       int mouseC = (e.getX()/size.height);
@@ -122,4 +123,16 @@ public class guipanel extends JPanel
    public void resized()
    {
    }
+   public static class mouselisten implements MouseListener
+   {
+      public void mouseClicked(MouseEvent e) { }
+      public void	mouseEntered(MouseEvent e) { }
+      public void	mouseExited(MouseEvent e)  { }
+      public void	mousePressed(MouseEvent e) { }
+      public void	mouseReleased(MouseEvent e)
+      {
+         processmouse(e);
+      }
+   }
+
 }

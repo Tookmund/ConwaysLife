@@ -12,7 +12,7 @@ public class gui
       gp = new guipanel();
       frame.setContentPane(gp);
       frame.addKeyListener(new keylisten());
-      frame.addMouseListener(new mouselisten());
+      
       frame.setVisible(true);
    }
    public static class keylisten implements KeyListener 
@@ -24,17 +24,6 @@ public class gui
       public void keyReleased(KeyEvent e)
       {
          gp.processkeys(e.getKeyChar());
-      }
-   }
-   public static class mouselisten implements MouseListener
-   {
-      public void mouseClicked(MouseEvent e) { }
-      public void	mouseEntered(MouseEvent e) { }
-      public void	mouseExited(MouseEvent e)  { }
-      public void	mousePressed(MouseEvent e) { }
-      public void	mouseReleased(MouseEvent e)
-      {
-         gp.processmouse(e);
       }
    }
    public static class componentlisten implements ComponentListener
