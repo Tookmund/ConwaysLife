@@ -51,9 +51,10 @@ public class guipanel extends JPanel
                else g.setColor(Color.WHITE);
             }
             g.fillRect(x,y,size,size);
-            if (border && (g.getColor() == Color.WHITE))
+            if (border)
             {
-               g.setColor(Color.BLACK);
+               if (g.getColor() == Color.WHITE) g.setColor(Color.BLACK);
+               else g.setColor(Color.WHITE);
                g.drawRect(x,y,size,size);
                g.setColor(Color.WHITE);
             }
