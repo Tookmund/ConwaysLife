@@ -13,10 +13,8 @@ public class concommon
       }
       catch(Exception e)
       {
-         System.err.println("File "+fn+" Not Found\nUsing Random instead.");
-         System.out.println("How many rows and columns?");
-         Scanner sysout = new Scanner(System.in);
-         con = new Conways(sysout.nextInt(),sysout.nextInt());
+         System.err.println("File "+fn+" Not Found or Corrupted\nUsing Random instead.");
+         con = new Conways(50,50);
          con.populate();
          return con;
       }
