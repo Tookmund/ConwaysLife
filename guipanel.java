@@ -60,8 +60,10 @@ public class guipanel extends JPanel
       }
       if (!wrap)
       {
-         g.setColor(Color.MAGENTA);
-         g.drawRect(0,0,size*con.numColumns(),size*con.numRows());
+         Graphics2D g2 = (Graphics2D)g;
+         g2.setColor(Color.MAGENTA);
+         g2.setStroke(new BasicStroke(5));
+         g2.drawRect(0,0,size*con.numColumns(),size*con.numRows());
       }
    }
    private class Listener implements ActionListener
