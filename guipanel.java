@@ -101,6 +101,14 @@ public class guipanel extends JPanel
             con.populate();
             go = true;
          }
+         else if (c == 's')
+         {
+            go = false;
+            String s = JOptionPane.showInputDialog("New Dimensions");
+            String[] z = s.split(" ");
+            con = new Conways(Integer.parseInt(z[0]),Integer.parseInt(z[1]));
+            con.populate();
+         }
          // Shift doesn't matter
          else if (c == '=' || c == '+') size++;
          else if (c == '-' || c == '_') size--;
