@@ -5,7 +5,7 @@ public class gui
    private static guipanel gp;
    public static void main(String[]args)
    {
-      JFrame frame = new JFrame("(p)wrap( )start/stop(w/r)write/readFile(c)clear(n)new(s)changeSize(+/-)resizeTiles");
+      JFrame frame = new JFrame("(p)wrap( )start/stop(w/r)write/readFile(c)clear(n)new(s)changeSize(b)border(+/-)resizeTiles");
       frame.setSize(520,540);
       frame.setLocation(100, 50);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

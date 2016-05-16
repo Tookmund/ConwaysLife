@@ -12,6 +12,7 @@ public class guipanel extends JPanel
    private static int playerR;			// start row for the player
    private static int playerC;			// start col for the player
    private boolean wrap;
+   private boolean border;
    public guipanel()
    {
       int r = 50;
@@ -23,6 +24,7 @@ public class guipanel extends JPanel
       go = false;
       addMouseListener(new mouselisten());
       wrap = true;
+      border = false;
       t.start();
    }
    @Override
@@ -49,6 +51,12 @@ public class guipanel extends JPanel
                else g.setColor(Color.WHITE);
             }
             g.fillRect(x,y,size,size);
+            if (border && (g.getColor() == Color.WHITE))
+            {
+               g.setColor(Color.BLACK);
+               g.drawRect(x,y,size,size);
+               g.setColor(Color.WHITE);
+            }
             x+=size;
          }
          y+=size;
@@ -103,6 +111,7 @@ public class guipanel extends JPanel
             con = new Conways(Integer.parseInt(z[0]),Integer.parseInt(z[1]));
             con.populate();
          }
+         else if (c == 'b') border = !border;
          // Shift doesn't matter
          else if (c == '=' || c == '+') size++;
          else if (c == '-' || c == '_') size--;
