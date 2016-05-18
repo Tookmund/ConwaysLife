@@ -65,7 +65,7 @@ public class guipanel extends JPanel
       if (!wrap)
       {
          Graphics2D g2 = (Graphics2D)g;
-         g2.setColor(Color.MAGENTA);
+         g2.setColor(Color.BLUE);
          g2.setStroke(new BasicStroke(5));
          g2.drawRect(0,0,size*con.numColumns(),size*con.numRows());
       }
