@@ -9,10 +9,10 @@ public class guipanel extends JPanel
    private static final int DELAY = 100;
    private static boolean go;
    private static byte size;           // size of a cell
-   private static int playerR;			// start row for the player
-   private static int playerC;			// start col for the player
    private boolean wrap;
    private boolean border;
+   private boolean one;
+   
    public guipanel()
    {
       int r = 50;
@@ -25,6 +25,7 @@ public class guipanel extends JPanel
       addMouseListener(new mouselisten());
       wrap = true;
       border = false;
+      one = false;
       t.start();
    }
    @Override
@@ -56,7 +57,6 @@ public class guipanel extends JPanel
                if (g.getColor() == Color.WHITE) g.setColor(Color.BLACK);
                else g.setColor(Color.WHITE);
                g.drawRect(x,y,size,size);
-               g.setColor(Color.WHITE);
             }
             x+=size;
          }
@@ -116,7 +116,22 @@ public class guipanel extends JPanel
          // Shift doesn't matter
          else if (c == '=' || c == '+') size++;
          else if (c == '-' || c == '_') size--;
-         else if (c == ' ') go = !go;
+         else if (c == '.' || c == '>')
+         {
+            go = false;
+            one = true;
+            
+         }
+         else if (c == ',' || c == '<') 
+         {
+            one = false;
+            go = true;
+         }
+         else if (c == ' ')
+         {
+            if (!one) go = !go;
+            else con.generation();
+         }
    }
    public static void processmouse(MouseEvent e)
    {
@@ -129,16 +144,7 @@ public class guipanel extends JPanel
          else if (e.getButton() == 3) con.set(mouseR,mouseC,null);
       }
    }
-   public void mouseMoved(MouseEvent e)
-   {
-      int mouseR = (e.getY()/size);
-      int mouseC = (e.getX()/size);
-      if(mouseR >=0 && mouseC >= 0 && mouseR < con.numRows() && mouseC < con.numColumns())
-      {
-         playerR = mouseR;
-         playerC = mouseC;
-      }
-   }
+
    public static class mouselisten implements MouseListener
    {
       public void mouseClicked(MouseEvent e) { }

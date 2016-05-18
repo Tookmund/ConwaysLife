@@ -18,3 +18,5 @@ r - Read board from file
 n - Generate new random board  
 s - Resize board and regenerate  
 b - Toggle cell borders 
+./> - Advance one generation at a time
+,/< - Automatically advance generations
