@@ -16,5 +16,5 @@ l - Clear the board
 w - Write board to file  
 r - Read board from file  
 n - Generate new random board  
-s - Resize and Regenerate  
+s - Resize board and regenerate  
 b - Toggle cell borders 
