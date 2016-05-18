@@ -31,12 +31,12 @@ public class guipanel extends JPanel
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
-      int x = 0;
-      int y = 0;
+      int x = 5;
+      int y = 5;
       int n = 0;
       for(int r = 0; r < con.numRows(); r++)
       {
-         x = 0;
+         x = 5;
          for (int c = 0; c < con.numColumns(); c++)
          {
             n = con.getNeighbors(r,c);
@@ -67,7 +67,7 @@ public class guipanel extends JPanel
          Graphics2D g2 = (Graphics2D)g;
          g2.setColor(Color.BLUE);
          g2.setStroke(new BasicStroke(5));
-         g2.drawRect(0,0,size*con.numColumns(),size*con.numRows());
+         g2.drawRect(5,5,size*con.numColumns()+5,size*con.numRows()+5);
       }
    }
    private class Listener implements ActionListener
