@@ -13,7 +13,7 @@ public class cli
       if (i > 0)
       {
          System.out.print("Filename: ");
-         con = concommon.fromFile(input.next());
+         con = concommon.fromFile(input.next(),con.numRows(),con.numColumns());
       }
       else
       {

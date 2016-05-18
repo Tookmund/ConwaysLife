@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.io.*;
 public class concommon
 {
-   public static Conways fromFile(String fn)
+   public static Conways fromFile(String fn,int row,int col)
    {
       Conways con;
       Scanner input;
@@ -14,7 +14,7 @@ public class concommon
       catch(Exception e)
       {
          System.err.println("File "+fn+" Not Found or Corrupted\nUsing Random instead.");
-         con = new Conways(50,50);
+         con = new Conways(row,col);
          con.populate();
          return con;
       }

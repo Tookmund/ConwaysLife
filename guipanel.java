@@ -87,8 +87,8 @@ public class guipanel extends JPanel
             removeAll();
             revalidate();
             repaint();
-            con = null;
-            con = concommon.fromFile(s);
+            wrap = true;
+            con = concommon.fromFile(s,con.numRows(),con.numColumns());
          }
          else if (c == 'w')
          {
@@ -120,7 +120,6 @@ public class guipanel extends JPanel
          {
             go = false;
             one = true;
-            
          }
          else if (c == ',' || c == '<') 
          {
