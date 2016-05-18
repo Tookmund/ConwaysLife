@@ -8,10 +8,21 @@ public class Conways
 {
    private Matrixable<life> board;
    private boolean wraparound = true;
+   private int[] born = {3};
+   private int[] survive = {2,3};
 
-   public Conways(int r, int c)
+   public Conways(int r, int c, String rulesfilename)
    {
       board = new SparseMatrix<life>(r,c);
+      File rulesfile;
+      try 
+      {
+         rulesfile = new File(rulesfilename);
+      }
+      catch (Exception e)
+      {
+         System.err.println("Rules File failed to load\nUsing Conways instead");
+      }
    }
    public void generation()
    {
