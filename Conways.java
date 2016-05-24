@@ -11,13 +11,18 @@ public class Conways
    private int[] born = {3};
    private int[] survive = {2,3};
 
-   public Conways(int r, int c, String rulesfilename)
+   public Conways(int r, int c, String rules)
    {
       board = new SparseMatrix<life>(r,c);
+      if (rules != null) loadrules(rules);
+      
+   }
+   private void loadrules(String fn)
+   {
       File rulesfile;
       try 
       {
-         rulesfile = new File(rulesfilename);
+         rulesfile = new File(fn);
       }
       catch (Exception e)
       {
