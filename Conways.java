@@ -23,8 +23,6 @@ public class Conways
          System.exit(1);
       }
    }
-   public Integer[] getBorn() { return born; }
-   public Integer[] getSurvive() { return survive; }
    private void loadrules(String fn) throws IOException
    {
       File rulesfile;
@@ -141,24 +139,34 @@ public class Conways
       }
       return total;
    }
+   public boolean isBorn(int n)
+   {
+      for (int i = 0; i < born.length; i++)
+      {
+         if (born[i] == n) return true;
+      }
+      return false;
+   }
+   public boolean isSurvive(int n)
+   {
+      for (int i = 0; i < survive.length; i++)
+      {
+         if (survive[i] == n) return true;
+      }
+      return false;
+   }
    public life update(life l, int n)
    {
       if (l == null)
       {
-         for (int i = 0; i < born.length; i++)
-         {
-            if (born[i] == n) return new life();
-         }
+         if (isBorn(n)) return new life();
+         return null;
       }
       else
       {
-         for (int i = 0; i < survive.length; i++)
-         {
-            if (survive[i] == n) return l;
-         }
+         if (isSurvive(n)) return l;
          return null;
       }
-      return l;
    }
    public void populate()
    {
