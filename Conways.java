@@ -1,33 +1,74 @@
 import java.util.Random;
+import java.util.ArrayList;
 import java.io.FileInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class Conways 
 {
    private Matrixable<life> board;
    private boolean wraparound = true;
-   private int[] born = {3};
-   private int[] survive = {2,3};
+   private Integer[] born = {3};
+   private Integer[] survive = {2,3};
 
    public Conways(int r, int c, String rules)
    {
       board = new SparseMatrix<life>(r,c);
-      if (rules != null) loadrules(rules);
-      
+      try
+      {
+         if (rules != null) loadrules(rules);
+      }
+      catch(Exception e)
+      {
+         System.err.println("IOException in Conways\nPlease restart");
+         System.exit(1);
+      }
    }
-   private void loadrules(String fn)
+   private void loadrules(String fn) throws IOException
    {
       File rulesfile;
+      FileInputStream rules;
       try 
       {
+         
          rulesfile = new File(fn);
+         rules = new FileInputStream(rulesfile);
       }
       catch (Exception e)
       {
          System.err.println("Rules File failed to load\nUsing Conways instead");
+         return;
       }
+      int c;
+      // arraylists converted back to arrays at the end
+      ArrayList<Integer> b = new ArrayList<Integer>();
+      ArrayList<Integer> s = new ArrayList<Integer>();
+      // skip B/b
+      rules.read();
+      // Where to add numbers
+      boolean br = true;
+      for (long i = 0; i < rulesfile.length(); i++)
+      {
+         c = rules.read();
+         if (c == '/')
+         {
+            // Skip S/s
+            rules.read();
+            br = false;
+         }
+         else
+         {
+            if (br)
+            {
+               b.add(c);
+            }
+            else
+            {
+               s.add(c);
+            }
+         }
+      }
+      born = (Integer[])(b.toArray());
+      survive = (Integer[])(s.toArray());
    }
    public void generation()
    {
@@ -98,21 +139,22 @@ public class Conways
       }
       return total;
    }
-   public life update(life l,int n)
+   public life update(life l, int n)
    {
-       // Rules copied from http://www.conwaylife.com/wiki/Conway's_Game_of_Life
-      boolean live = (l != null);
-       // Any live cell with fewer than two live neighbours dies (referred to as underpopulation).
-      if (live && n < 2) l = null;
-       // Any live cell with more than three live neighbours dies (referred to as overpopulation or overcrowding).
-      if (live && n > 3) l = null;
-       // Any live cell with two or three live neighbours lives, unchanged, to the next generation.
-      if (live && (n == 2 || n == 3) ) 
-         return l;
-       // Any dead cell with exactly three live neighbours will come to life.
-      if (!live && n == 3) 
+      if (l == null)
       {
-         l = new life();
+         for (int i = 0; i < born.length; i++)
+         {
+            if (born[i] == n) return new life();
+         }
+      }
+      else
+      {
+         for (int i = 0; i < survive.length; i++)
+         {
+            if (survive[i] == n) return l;
+         }
+         return null;
       }
       return l;
    }
