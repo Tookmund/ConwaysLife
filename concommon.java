@@ -2,19 +2,19 @@ import java.util.Scanner;
 import java.io.*;
 public class concommon
 {
-   public static Conways fromFile(String fn,int row,int col)
+   public static Conways fromFile(String fn,int row,int col,String rulefile)
    {
       Conways con;
       Scanner input;
       try
       {
          input = new Scanner(new File(fn));
-         con = new Conways(input.nextInt(),input.nextInt());
+         con = new Conways(input.nextInt(),input.nextInt(),rulefile);
       }
       catch(Exception e)
       {
          System.err.println("File "+fn+" Not Found or Corrupted\nUsing Random instead.");
-         con = new Conways(row,col);
+         con = new Conways(row,col,rulefile);
          con.populate();
          return con;
       }
