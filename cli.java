@@ -20,7 +20,7 @@ public class cli
          System.out.print("How many rows and columns? ");
          int r = input.nextInt();
          int c = input.nextInt();
-         con = new Conways(r,c);
+         con = new Conways(r,c,null);
          con.populate();
          System.out.print("Output layout to file? [1/0]");
          i = input.nextInt();

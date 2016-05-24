@@ -19,7 +19,7 @@ public class guipanel extends JPanel
       int c = 50;
       size = 10;
       t = new Timer(DELAY, new Listener());
-      con = new Conways(r,c);
+      con = new Conways(r,c,null);
       con.populate();
       go = false;
       addMouseListener(new mouselisten());
@@ -109,7 +109,7 @@ public class guipanel extends JPanel
             go = false;
             String s = JOptionPane.showInputDialog("New Dimensions");
             String[] z = s.split(" ");
-            con = new Conways(Integer.parseInt(z[0]),Integer.parseInt(z[1]));
+            con = new Conways(Integer.parseInt(z[0]),Integer.parseInt(z[1]),null);
             con.populate();
          }
          else if (c == 'b') border = !border;
