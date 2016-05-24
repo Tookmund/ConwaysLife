@@ -12,6 +12,7 @@ public class guipanel extends JPanel
    private boolean wrap;
    private boolean border;
    private boolean one;
+   private String rulefile; // Name of rulefile
    
    public guipanel()
    {
@@ -19,7 +20,7 @@ public class guipanel extends JPanel
       int c = 50;
       size = 10;
       t = new Timer(DELAY, new Listener());
-      con = new Conways(r,c,null);
+      con = new Conways(r,c,rulefile);
       con.populate();
       go = false;
       addMouseListener(new mouselisten());
@@ -40,16 +41,24 @@ public class guipanel extends JPanel
          x = 5;
          for (int c = 0; c < con.numColumns(); c++)
          {
+            Integer[] b = con.getBorn();
+            Integer[] s = con.getSurvive();
             n = con.getNeighbors(r,c);
-            if(con.get(r,c) != null)
+            if(con.get(r,c) == null)
             {
-               if (n > 3) g.setColor(Color.RED);
-               else g.setColor(Color.BLACK);
+               if(con.isBorn(n))
+               {
+                  g.setColor(Color.GREEN);
+               }
+               else g.setColor(Color.WHITE);
             }
             else 
             {
-               if (n == 3) g.setColor(Color.GREEN);
-               else g.setColor(Color.WHITE);
+               if(con.isSurvive(n))
+               {
+                  g.setColor(Color.BLACK);
+               }
+               else g.setColor(Color.RED);
             }
             g.fillRect(x,y,size,size);
             if (border)
@@ -88,7 +97,7 @@ public class guipanel extends JPanel
             revalidate();
             repaint();
             wrap = true;
-            con = concommon.fromFile(s,con.numRows(),con.numColumns());
+            con = concommon.fromFile(s,con.numRows(),con.numColumns(),rulefile);
          }
          else if (c == 'w')
          {
@@ -109,7 +118,7 @@ public class guipanel extends JPanel
             go = false;
             String s = JOptionPane.showInputDialog("New Dimensions");
             String[] z = s.split(" ");
-            con = new Conways(Integer.parseInt(z[0]),Integer.parseInt(z[1]),null);
+            con = new Conways(Integer.parseInt(z[0]),Integer.parseInt(z[1]),rulefile);
             con.populate();
          }
          else if (c == 'b') border = !border;
