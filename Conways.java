@@ -23,6 +23,8 @@ public class Conways
          System.exit(1);
       }
    }
+   public Integer[] getBorn() { return born; }
+   public Integer[] getSurvive() { return survive; }
    private void loadrules(String fn) throws IOException
    {
       File rulesfile;
