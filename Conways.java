@@ -19,7 +19,7 @@ public class Conways
       }
       catch(Exception e)
       {
-         System.err.println("IOException in Conways\nPlease restart");
+         System.err.println("Exception in Load Rules\nPlease restart");
          System.err.println(e.getMessage()+'\n'+e.getStackTrace()[0].getFileName()+":"+e.getStackTrace()[0].getLineNumber());
          System.exit(1);
       }
@@ -36,7 +36,7 @@ public class Conways
       }
       catch (Exception e)
       {
-         System.err.println("Rules File failed to load\nUsing Conways instead");
+         System.err.println("Rules File failed to load\nUsing current ruleset instead");
          return;
       }
       int c;
