@@ -16,10 +16,8 @@ public class gui
    }
    public static class keylisten implements KeyListener 
    {
-      public void keyTyped(KeyEvent e) { }
-         
-      public void keyPressed(KeyEvent e) { }
-   
+      public void keyTyped(KeyEvent e) {}
+      public void keyPressed(KeyEvent e) {}
       public void keyReleased(KeyEvent e)
       {
          gp.processkeys(e.getKeyChar());
