@@ -43,19 +43,13 @@ public class Conways
       // arraylists converted back to arrays at the end
       ArrayList<Integer> b = new ArrayList<Integer>();
       ArrayList<Integer> s = new ArrayList<Integer>();
-      // skip B/b
-      rules.read();
       // Where to add numbers
       boolean br = true;
+      // Born/Survive
       for (long i = 0; i < rulesfile.length(); i++)
       {
          c = rules.read();
-         if (c == '/')
-         {
-            // Skip S/s
-            rules.read();
-            br = false;
-         }
+         if (c == '/') br = false;
          else
          {
             // Subtract 48 because these are raw bytes
