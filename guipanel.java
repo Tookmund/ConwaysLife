@@ -85,6 +85,9 @@ public class guipanel extends JPanel
          repaint();
       }
    }
+   // pre: c is the char of a key that has been pressed
+   // post: Acts upon the keypress
+   // See README for what it should do
    public void processkeys(char c)
    {
          if (c == 'r')
@@ -145,6 +148,9 @@ public class guipanel extends JPanel
             con.populate();
          }
    }
+   // pre: e is the MouseEvent passed to a mouselistener
+   // post: Adds a cell at the mouse location if left-clicked (1)
+   // or removes the cell if right-clicked (3)
    public static void processmouse(MouseEvent e)
    {
       int mouseR = (e.getY()/size);

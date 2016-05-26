@@ -24,6 +24,8 @@ public class Conways
          System.exit(1);
       }
    }
+   // pre: fn is a path to a file in born/survive format
+   // post: fills the born and survive arrays
    private void loadrules(String fn) throws IOException
    {
       File rulesfile;
@@ -53,6 +55,7 @@ public class Conways
          else
          {
             // Subtract 48 because these are raw bytes
+            // Zero is 48 in ASCII
             if (br)
             {
                if ((c-48) >= 0) b.add(c-48);
@@ -63,6 +66,7 @@ public class Conways
             }
          }
       }
+      // Have to fill arrays because arraylist toArray doesn't work properly
       born = new Integer[b.size()];
       for(int i = 0; i < b.size(); i++)
       {
@@ -75,6 +79,7 @@ public class Conways
       }
 
    }
+   // post: Advances all cells one generation
    public void generation()
    {
       Matrixable<life> b = board.clone();
@@ -89,15 +94,20 @@ public class Conways
          }
       }
    }
+   // post: Toggles wraparound
    public boolean wrap() 
    { 
       wraparound = !wraparound;
       return wraparound;
    }
+   // calls livingNeighbors with current board
+   // see livingNeighbors
    public int getNeighbors(int r, int c)
    {
       return livingNeighbors(board,r,c);
    }
+   // pre: b is a board to check, r and c are a valid location of a cell on the board
+   // post: returns the number of neighbors a cell has
    private int livingNeighbors(Matrixable<life> b,int r,int c)
    {
       // Check all eight neighbors
@@ -144,6 +154,8 @@ public class Conways
       }
       return total;
    }
+   // pre: n is the number of neighbors a cell has
+   // post; returns whether a cell can be born this generation
    public boolean isBorn(int n)
    {
       for (int i = 0; i < born.length; i++)
@@ -152,6 +164,8 @@ public class Conways
       }
       return false;
    }
+   // pre: n is the number of neighbors a cell has
+   // post: returns whether a cell can survive this generation
    public boolean isSurvive(int n)
    {
       for (int i = 0; i < survive.length; i++)
@@ -160,6 +174,8 @@ public class Conways
       }
       return false;
    }
+   // pre: l is a cell at a location, n is the number of neighbors l has
+   // post: returns an updated version of l based on the current ruleset
    public life update(life l, int n)
    {
       if (l == null)
@@ -173,6 +189,7 @@ public class Conways
          return null;
       }
    }
+   // post: the board is randomly populated with cells
    public void populate()
    {
       Random rand = new Random();
@@ -187,6 +204,8 @@ public class Conways
          }
       }
    }
+   // Methods exposed from the board
+   // See Matrixable
    public String toString() { return board.toString(); }
    public int numRows() { return board.numRows(); }
    public int numColumns() { return board.numColumns(); }

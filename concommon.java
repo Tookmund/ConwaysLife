@@ -2,6 +2,10 @@ import java.util.Scanner;
 import java.io.*;
 public class concommon
 {
+   // pre: fn is a path to a conways save, row and col and the total number of rows
+   // and columns, and rulefile is the path to the rulefile to use
+   // post: Return a Conways with the given save loaded or a random Conways
+   // if loading the save failed. Both have the rulefile.
    public static Conways fromFile(String fn,int row,int col,String rulefile)
    {
       Conways con;
@@ -37,6 +41,8 @@ public class concommon
       }
       return con;
    }
+   // pre: con is a running conways game, filename is a path to save the game to
+   // post: con is written to filename
    public static void toFile(Conways con, String filename)
    {
       PrintWriter f;
