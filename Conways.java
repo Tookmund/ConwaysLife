@@ -55,11 +55,11 @@ public class Conways
             // Subtract 48 because these are raw bytes
             if (br)
             {
-               if ((c-48) > 0) b.add(c-48);
+               if ((c-48) >= 0) b.add(c-48);
             }
             else
             {
-               if ((c-48) > 0) s.add(c-48);
+               if ((c-48) >= 0) s.add(c-48);
             }
          }
       }
