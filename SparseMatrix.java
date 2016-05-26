@@ -20,7 +20,7 @@ public class SparseMatrix<anyType> implements Matrixable<anyType>, Cloneable
 
    }
    
-   public SparseMatrix<anyType> clone()
+   public Matrixable<anyType> clone()
    {
       ArrayList<matrixentry> a = new ArrayList<matrixentry>();//(ArrayList<matrixentry>)al.clone();
       for(int i = 0; i < al.size(); i++)
@@ -29,7 +29,7 @@ public class SparseMatrix<anyType> implements Matrixable<anyType>, Cloneable
          a.add(al.get(i));
       
       }
-      return new SparseMatrix<anyType>(a,rows,cols);
+      return (Matrixable<anyType>)(new SparseMatrix<anyType>(a,rows,cols));
    }
    private int getkey(int r,int c) { 
       return (r*cols)+c; }

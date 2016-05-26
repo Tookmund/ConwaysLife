@@ -15,5 +15,5 @@
       public void clear();							//clears all elements out of the list
 		public void setBlank(char blank);		//allows the client to set the character that a blank spot in the array is
 															//represented by in String toString()
-      public SparseMatrix<anyType> clone();  //clone a Matrixable
+      public Matrixable<anyType> clone();  //clone a Matrixable
    }
