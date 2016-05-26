@@ -1,9 +1,9 @@
 Conway's Game of Life
 =====================
 
-Yet Another Conway's Game of Life Implementation
+Yet Another Conway's Game of Life Implementation  
 
-
+Most rulesets were borrowed from http://www.mirekw.com/ca/rullex_life.html
 
 Controls
 --------
