@@ -41,8 +41,6 @@ public class guipanel extends JPanel
          x = 5;
          for (int c = 0; c < con.numColumns(); c++)
          {
-            Integer[] b = con.getBorn();
-            Integer[] s = con.getSurvive();
             n = con.getNeighbors(r,c);
             if(con.get(r,c) == null)
             {
@@ -139,6 +137,12 @@ public class guipanel extends JPanel
          {
             if (!one) go = !go;
             else con.generation();
+         }
+         else if (c == 'e')
+         {
+            rulefile = JOptionPane.showInputDialog("Ruleset File");
+            con = new Conways(con.numRows(),con.numColumns(),rulefile);
+            con.populate();
          }
    }
    public static void processmouse(MouseEvent e)

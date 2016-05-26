@@ -20,6 +20,7 @@ public class Conways
       catch(Exception e)
       {
          System.err.println("IOException in Conways\nPlease restart");
+         System.err.println(e.getMessage()+'\n'+e.getStackTrace()[0].getFileName()+":"+e.getStackTrace()[0].getLineNumber());
          System.exit(1);
       }
    }
@@ -57,18 +58,28 @@ public class Conways
          }
          else
          {
+            // Subtract 48 because these are raw bytes
             if (br)
             {
-               b.add(c);
+               if ((c-48) > 0) b.add(c-48);
             }
             else
             {
-               s.add(c);
+               if ((c-48) > 0) s.add(c-48);
             }
          }
       }
-      born = (Integer[])(b.toArray());
-      survive = (Integer[])(s.toArray());
+      born = new Integer[b.size()];
+      for(int i = 0; i < b.size(); i++)
+      {
+         born[i] = (Integer)(b.get(i));
+      }
+       survive = new Integer[s.size()];
+      for(int i = 0; i < s.size(); i++)
+      {
+         survive[i] = (Integer)(s.get(i));
+      }
+
    }
    public void generation()
    {
