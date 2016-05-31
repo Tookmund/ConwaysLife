@@ -16,7 +16,7 @@ Example:
 - * * - -
 - * * - -
 ````
-This is a conways game with 4 rows and 4 columns  
+This is a conways game with 4 rows and 5 columns  
 It has a 2x2 box at the bottom of living cells but the rest are dead  
 See the saves folder for more examples
 
@@ -32,7 +32,7 @@ w - Write board to file
 r - Read board from file  
 n - Generate new random board  
 s - Resize board and regenerate  
-b - Toggle cell borders 
-./> - Advance one generation at a time
-,/< - Automatically advance generations
-e - Change ruleset
+b - Toggle cell borders  
+./> - Advance one generation at a time  
+,/< - Automatically advance generations  
+e - Change ruleset  
