@@ -6,13 +6,14 @@ public class guipanel extends JPanel
 {
    private static Conways con;
    private Timer t;
-   private static final int DELAY = 100;
-   private static boolean go;
-   private static byte size;           // size of a cell
-   private boolean wrap;
-   private boolean border;
-   private boolean one;
-   private String rulefile; // Name of rulefile
+   private static final int DELAY = 100;  // How long (in milliseconds) to wait 
+                                                // before redrawing the screen
+   private static boolean go;             // Whether simulation should go
+   private static byte size;              // Size of a cell
+   private boolean wrap;                  // Whether wraparound is enabled
+   private boolean border;                // Whether cells should have a border
+   private boolean one;                   // Whether the simulation should go one step at a time
+   private String rulefile;               // Name of rulefile
    
    public guipanel()
    {
