@@ -3,7 +3,21 @@ Conway's Game of Life
 
 Yet Another Conway's Game of Life Implementation  
 
-Most rulesets were borrowed from http://www.mirekw.com/ca/rullex_life.html
+Most rulesets were borrowed from http://www.mirekw.com/ca/rullex_life.html  
+Rulesets are in born/survive format  
+Save files list rows and columns then represent the board with - for dead and * for living  
+Spaces are necessary
+
+Example:
+4 5
+- - - - -
+- - - - -
+- * * - -
+- * * - -
+
+This is a conways game with 4 rows and 4 columns  
+It has a 2x2 box at the bottom of living cells but the rest are dead  
+See the saves folder for more examples
 
 Controls
 --------
