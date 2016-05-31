@@ -13,6 +13,10 @@ public class Conways
    public Conways(int r, int c, String rules)
    {
       board = new SparseMatrix<life>(r,c);
+      /* Didn't want to put
+       * throws IOException
+       * everywhere
+       */
       try
       {
          if (rules != null) loadrules(rules);
