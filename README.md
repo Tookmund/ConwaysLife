@@ -9,12 +9,13 @@ Save files list rows and columns then represent the board with - for dead and * 
 Spaces are necessary
 
 Example:
+````
 4 5
 - - - - -
 - - - - -
 - * * - -
 - * * - -
-
+````
 This is a conways game with 4 rows and 4 columns  
 It has a 2x2 box at the bottom of living cells but the rest are dead  
 See the saves folder for more examples
