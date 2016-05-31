@@ -9,29 +9,20 @@ public class Conways
    private boolean wraparound = true;
    private Integer[] born = {3};
    private Integer[] survive = {2,3};
+   public boolean rulesValid = true;
 
    public Conways(int r, int c, String rules)
    {
       board = new SparseMatrix<life>(r,c);
-      /* Didn't want to put
-       * throws IOException
-       * everywhere
-       */
-      try
+      if (rules != null) 
       {
-         if (rules != null) loadrules(rules);
-      }
-      catch(Exception e)
-      {
-         System.err.println("Exception in Load Rules\nPlease restart");
-         StackTraceElement s = e.getStackTrace()[0];
-         System.err.println(e.getMessage()+'\n'+s.getFileName()+":"+s.getLineNumber());
-         System.exit(1);
+         byte b = loadrules(rules);
+         if (b > 0) rulesValid = false;
       }
    }
    // pre: fn is a path to a file in born/survive format
    // post: fills the born and survive arrays
-   private void loadrules(String fn) throws IOException
+   private byte loadrules(String fn)
    {
       File rulesfile;
       FileInputStream rules;
@@ -43,10 +34,9 @@ public class Conways
       }
       catch (Exception e)
       {
-         System.err.println("Rules File failed to load\nUsing current ruleset instead");
-         return;
+         return 1;
       }
-      int c;
+      int c = -1;
       // arraylists converted back to arrays at the end
       ArrayList<Integer> b = new ArrayList<Integer>();
       ArrayList<Integer> s = new ArrayList<Integer>();
@@ -55,7 +45,14 @@ public class Conways
       // Born/Survive
       for (long i = 0; i < rulesfile.length(); i++)
       {
-         c = rules.read();
+         try
+         {
+            c = rules.read();
+         }
+         catch(Exception e) 
+         {
+            return 1;
+         }
          if (c == '/') br = false;
          else
          {
@@ -83,7 +80,7 @@ public class Conways
       {
          survive[i] = (Integer)(s.get(i));
       }
-
+      return 0;
    }
    // post: Advances all cells one generation
    public void generation()
