@@ -111,6 +111,7 @@ public class guipanel extends JPanel
          {
             go = false;
             con.populate();
+            repaint();
             go = true;
          }
          else if (c == 's')
@@ -121,6 +122,7 @@ public class guipanel extends JPanel
             String[] z = s.split(" ");
             con = new Conways(Integer.parseInt(z[0]),Integer.parseInt(z[1]),rulefile);
             con.populate();
+            repaint();
          }
          else if (c == 'b') border = !border;
          // Shift doesn't matter
@@ -146,6 +148,7 @@ public class guipanel extends JPanel
             rulefile = JOptionPane.showInputDialog("Ruleset File");
             con = new Conways(con.numRows(),con.numColumns(),rulefile);
             con.populate();
+            repaint();
          }
    }
    // pre: e is the MouseEvent passed to a mouselistener
