@@ -24,7 +24,8 @@ public class Conways
       catch(Exception e)
       {
          System.err.println("Exception in Load Rules\nPlease restart");
-         System.err.println(e.getMessage()+'\n'+e.getStackTrace()[0].getFileName()+":"+e.getStackTrace()[0].getLineNumber());
+         StackTraceElement s = e.getStackTrace()[0];
+         System.err.println(e.getMessage()+'\n'+s.getFileName()+":"+s.getLineNumber());
          System.exit(1);
       }
    }
