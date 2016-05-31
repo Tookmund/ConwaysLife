@@ -64,11 +64,11 @@ public class Conways
             c = c-48;
             if (br)
             {
-               if (c >= 0) b.add(c-48);
+               if (c >= 0) b.add(c);
             }
             else
             {
-               if (c >= 0) s.add(c-48);
+               if (c >= 0) s.add(c);
             }
          }
       }
