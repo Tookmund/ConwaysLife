@@ -100,9 +100,9 @@ public class Conways
       wraparound = !wraparound;
       return wraparound;
    }
-   // calls livingNeighbors with current board
-   // see livingNeighbors
-   public int getNeighbors(int r, int c)
+   // calls other livingNeighbors with current board
+   // see other livingNeighbors
+   public int livingNeighbors(int r, int c)
    {
       return livingNeighbors(board,r,c);
    }

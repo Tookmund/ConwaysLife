@@ -41,7 +41,7 @@ public class guipanel extends JPanel
          x = 5;
          for (int c = 0; c < con.numColumns(); c++)
          {
-            n = con.getNeighbors(r,c);
+            n = con.livingNeighbors(r,c);
             if(con.get(r,c) == null)
             {
                if(con.isBorn(n))
