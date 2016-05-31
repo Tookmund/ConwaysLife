@@ -118,6 +118,7 @@ public class guipanel extends JPanel
          else if (c == 's')
          {
             go = false;
+            wrap = true;
             String s = JOptionPane.showInputDialog("New Dimensions");
             String[] z = s.split(" ");
             con = new Conways(Integer.parseInt(z[0]),Integer.parseInt(z[1]),rulefile);
