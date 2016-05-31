@@ -95,11 +95,9 @@ public class guipanel extends JPanel
          {
             go = false;
             String s = JOptionPane.showInputDialog("Read from File");
-            removeAll();
-            revalidate();
-            repaint();
             wrap = true;
             con = concommon.fromFile(s,con.numRows(),con.numColumns(),rulefile);
+            repaint();
          }
          else if (c == 'w')
          {
