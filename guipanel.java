@@ -14,6 +14,8 @@ public class guipanel extends JPanel
    private boolean border;                // Whether cells should have a border
    private boolean one;                   // Whether the simulation should go one step at a time
    private String rulefile;               // Name of rulefile
+   private String message;                // Message to print to screen
+   private byte mestime;                  // How long (in number of repaints) to display message
    
    public guipanel()
    {
@@ -77,6 +79,14 @@ public class guipanel extends JPanel
          g2.setStroke(new BasicStroke(5));
          g2.drawRect(5,5,size*con.numColumns()+5,size*con.numRows()+5);
       }
+      if (mestime > 0)
+      {
+         mestime--;
+         g.setFont(new Font("Serif", Font.BOLD, 30));
+         g.setColor(Color.BLACK);
+         g.drawString(message,10,30);
+         if (mestime <= 0) message = null;
+      }
    }
    private class Listener implements ActionListener
    {
@@ -97,6 +107,11 @@ public class guipanel extends JPanel
             String s = JOptionPane.showInputDialog("Read from File");
             wrap = true;
             con = concommon.fromFile(s,con.numRows(),con.numColumns(),rulefile);
+            if (con.error != null) 
+            {
+               setMessage(con.error);
+               con.error = null;
+            }
             repaint();
          }
          else if (c == 'w')
@@ -104,6 +119,11 @@ public class guipanel extends JPanel
             go = false;
             String s = JOptionPane.showInputDialog("Write to File");
             concommon.toFile(con,s);
+            if (con.error != null) 
+            {
+               setMessage(con.error);
+               con.error = null;
+            }
          }
          else if (c == 'p') wrap = con.wrap();
          else if (c == 'c') con.clear();
@@ -145,8 +165,14 @@ public class guipanel extends JPanel
          }
          else if (c == 'e')
          {
-            rulefile = JOptionPane.showInputDialog("Ruleset File");
-            con = new Conways(con.numRows(),con.numColumns(),rulefile);
+            String newrulefile = JOptionPane.showInputDialog("Ruleset File");
+            con = new Conways(con.numRows(),con.numColumns(),newrulefile);
+            if (con.rulesValid) rulefile = newrulefile;
+            else 
+            {
+               setMessage("Invalid ruleset. Using default");
+               rulefile = null;
+            }
             con.populate();
             repaint();
          }
@@ -165,7 +191,11 @@ public class guipanel extends JPanel
          else if (e.getButton() == 3) con.set(mouseR,mouseC,null);
       }
    }
-
+   private void setMessage(String m)
+   {
+      message = m;
+      mestime = 20;
+   }
    public static class mouselisten implements MouseListener
    {
       public void mouseClicked(MouseEvent e) { }
