@@ -167,7 +167,7 @@ public class guipanel extends JPanel
          {
             String newrulefile = JOptionPane.showInputDialog("Ruleset File");
             con = new Conways(con.numRows(),con.numColumns(),newrulefile);
-            if (con.rulesValid) rulefile = newrulefile;
+            if (con.rulesValid && newrulefile != null) rulefile = newrulefile;
             else 
             {
                setMessage("Invalid ruleset. Using default");
