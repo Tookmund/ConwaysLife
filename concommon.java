@@ -17,9 +17,9 @@ public class concommon
       }
       catch(Exception e)
       {
-         System.err.println("File "+fn+" Not Found or Corrupted\nUsing Random instead.");
          con = new Conways(row,col,rulefile);
          con.populate();
+         con.error = "File "+fn+" Not Found or Corrupted\nUsing Random instead.";
          return con;
       }
       for(int r = 0; input.hasNext() && r < con.numRows(); r++)
@@ -52,7 +52,7 @@ public class concommon
       }
       catch(Exception e)
       {
-         System.out.println(e.getMessage()+"\nFailed to open "+filename);
+         con.error = e.getMessage()+"\nFailed to open "+filename;
          return;
       }
       f.println(con.numRows()+" "+con.numColumns());
