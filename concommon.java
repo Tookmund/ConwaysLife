@@ -32,11 +32,7 @@ public class concommon
                con.set(r,c,new life());
             }
             else if (i == '-') continue;
-            else
-            {
-               // Redo this step of the loop
-               c--;
-            }
+            else continue;
          }
       }
       return con;
