@@ -10,7 +10,6 @@ public class guipanel extends JPanel
                                                 // before redrawing the screen
    private static boolean go;             // Whether simulation should go
    private static byte size;              // Size of a cell
-   private boolean wrap;                  // Whether wraparound is enabled
    private boolean border;                // Whether cells should have a border
    private boolean one;                   // Whether the simulation should go one step at a time
    private String rulefile;               // Name of rulefile
@@ -27,7 +26,6 @@ public class guipanel extends JPanel
       con.populate();
       go = false;
       addMouseListener(new mouselisten());
-      wrap = true;
       border = false;
       one = false;
       t.start();
@@ -72,7 +70,7 @@ public class guipanel extends JPanel
          }
          y+=size;
       }
-      if (!wrap)
+      if (!con.getwrap())
       {
          Graphics2D g2 = (Graphics2D)g;
          g2.setColor(Color.BLUE);
@@ -105,7 +103,6 @@ public class guipanel extends JPanel
          {
             go = false;
             String s = JOptionPane.showInputDialog("Read from File");
-            wrap = true;
             con = concommon.fromFile(s,con.numRows(),con.numColumns(),rulefile);
             if (con.error != null) 
             {
@@ -125,7 +122,7 @@ public class guipanel extends JPanel
                con.error = null;
             }
          }
-         else if (c == 'p') wrap = con.wrap();
+         else if (c == 'p') con.wrap();
          else if (c == 'c') con.clear();
          else if (c == 'n')
          {
@@ -137,7 +134,6 @@ public class guipanel extends JPanel
          else if (c == 's')
          {
             go = false;
-            wrap = true;
             String s = JOptionPane.showInputDialog("New Dimensions");
             String[] z = s.split(" ");
             con = new Conways(Integer.parseInt(z[0]),Integer.parseInt(z[1]),rulefile);
