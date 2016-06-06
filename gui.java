@@ -5,8 +5,8 @@ public class gui
    private static guipanel gp;
    public static void main(String[]args)
    {
-      JFrame frame = new JFrame("Conway's Game of Life - See README for controls");
-      frame.setSize(700,550);
+      JFrame frame = new JFrame("Conway's Game of Life");
+      frame.setSize(860,550);
       frame.setLocation(100, 50);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       gp = new guipanel();
