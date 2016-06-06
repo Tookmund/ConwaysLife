@@ -15,7 +15,6 @@ public class guipanel extends JPanel
    private String rulefile;               // Name of rulefile
    private String message;                // Message to print to screen
    private byte mestime;                  // How long (in number of repaints) to display message
-   Point mespoint;                        // Where to place the message
    
    public guipanel()
    {
@@ -29,7 +28,6 @@ public class guipanel extends JPanel
       addMouseListener(new mouselisten());
       border = false;
       one = false;
-      mespoint = new Point(10,30);
       t.start();
    }
    @Override
@@ -72,7 +70,8 @@ public class guipanel extends JPanel
          }
          y+=size;
       }
-      mespoint.x = x;
+      // Where error messages should be placed
+      y = 30;
       if (!con.getwrap())
       {
          Graphics2D g2 = (Graphics2D)g;
@@ -80,12 +79,33 @@ public class guipanel extends JPanel
          g2.setStroke(new BasicStroke(5));
          g2.drawRect(5,5,size*con.numColumns()+5,size*con.numRows()+5);
       }
+      // Draw Controls
+      g.setFont(new Font("Serif", Font.BOLD, 20));
+      g.setColor(Color.BLACK);
+      int mx = x+2;
+      int my = y+20;
+      String [] controls = { "Controls",
+                             "space - Start/stop simulation",
+                             "+/= - Increase size of board",
+                             "-/_ - Decrease size of board",
+                             "p - Disable/enable wraparound",
+                             "l - Clear the board",
+                             "w - Write board to file",
+                             "r - Read board from file",
+                             "n - Generate new random board",
+                             "s - Resize board and regenerate",
+                             "b - Toggle cell borders",
+                             "./> - Advance one generation at a time",
+                             ",/< - Automatically advance generations",
+                             "e - Change ruleset" };
+      for (int i = 0; i < controls.length; i++)
+      {
+         g.drawString(controls[i],mx,my+(i*20));
+      }
       if (mestime > 0)
       {
          mestime--;
-         g.setFont(new Font("Serif", Font.BOLD, 20));
-         g.setColor(Color.BLACK);
-         g.drawString(message,mespoint.x,mespoint.y);
+         g.drawString(message,mx,y);
          if (mestime <= 0) message = null;
       }
    }
