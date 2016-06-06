@@ -15,6 +15,7 @@ public class guipanel extends JPanel
    private String rulefile;               // Name of rulefile
    private String message;                // Message to print to screen
    private byte mestime;                  // How long (in number of repaints) to display message
+   Point mespoint;                        // Where to place the message
    
    public guipanel()
    {
@@ -28,6 +29,7 @@ public class guipanel extends JPanel
       addMouseListener(new mouselisten());
       border = false;
       one = false;
+      mespoint = new Point(10,30);
       t.start();
    }
    @Override
@@ -70,6 +72,7 @@ public class guipanel extends JPanel
          }
          y+=size;
       }
+      mespoint.x = x;
       if (!con.getwrap())
       {
          Graphics2D g2 = (Graphics2D)g;
@@ -80,9 +83,9 @@ public class guipanel extends JPanel
       if (mestime > 0)
       {
          mestime--;
-         g.setFont(new Font("Serif", Font.BOLD, 30));
+         g.setFont(new Font("Serif", Font.BOLD, 20));
          g.setColor(Color.BLACK);
-         g.drawString(message,10,30);
+         g.drawString(message,mespoint.x,mespoint.y);
          if (mestime <= 0) message = null;
       }
    }
@@ -166,7 +169,7 @@ public class guipanel extends JPanel
             if (con.rulesValid && newrulefile != null) rulefile = newrulefile;
             else 
             {
-               setMessage("Invalid ruleset. Using default");
+               setMessage("Invalid ruleset");
                rulefile = null;
             }
             con.populate();
