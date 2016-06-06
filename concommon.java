@@ -19,7 +19,7 @@ public class concommon
       {
          con = new Conways(row,col,rulefile);
          con.populate();
-         con.error = "File "+fn+" Not Found or Corrupted";
+         con.error = "File Not Found";
          return con;
       }
       for(int r = 0; input.hasNext() && r < con.numRows(); r++)
