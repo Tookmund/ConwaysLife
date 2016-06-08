@@ -184,7 +184,7 @@ public class guipanel extends JPanel
          }
          else if (c == 'e')
          {
-            String newrulefile = JOptionPane.showInputDialog("Ruleset File");
+            String newrulefile = "rulesets/"+JOptionPane.showInputDialog("Ruleset")+".txt";
             con = new Conways(con.numRows(),con.numColumns(),newrulefile);
             if (con.rulesValid && newrulefile != null) rulefile = newrulefile;
             else 
