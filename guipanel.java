@@ -26,7 +26,9 @@ public class guipanel extends JPanel
       con = new Conways(r,c,rulefile);
       con.populate();
       go = false;
-      addMouseListener(new mouselisten());
+      mouselisten m = new mouselisten();
+      addMouseListener(m);
+      addMouseMotionListener(m);
       border = false;
       one = false;
       t.start();
@@ -212,15 +214,15 @@ public class guipanel extends JPanel
    // pre: e is the MouseEvent passed to a mouselistener
    // post: Adds a cell at the mouse location if left-clicked (1)
    // or removes the cell if right-clicked (3)
-   public static void processmouse(MouseEvent e)
+   public static void processmouse(MouseEvent e,int b)
    {
       int mouseR = (e.getY()/size);
       int mouseC = (e.getX()/size);
       
       if(mouseR >=0 && mouseC >= 0 && mouseR < con.numRows() && mouseC < con.numColumns())
       {
-         if (e.getButton() == 1) con.set(mouseR,mouseC,new life());
-         else if (e.getButton() == 3) con.set(mouseR,mouseC,null);
+         if (b == 1) con.set(mouseR,mouseC,new life());
+         else if (b == 3) con.set(mouseR,mouseC,null);
       }
    }
    private void setMessage(String m)
@@ -228,15 +230,25 @@ public class guipanel extends JPanel
       message = m;
       mestime = 20;
    }
-   public static class mouselisten implements MouseListener
+   public static class mouselisten implements MouseListener,MouseMotionListener
    {
+      private int mb = 0;
       public void mouseClicked(MouseEvent e) { }
       public void	mouseEntered(MouseEvent e) { }
       public void	mouseExited(MouseEvent e)  { }
-      public void	mousePressed(MouseEvent e) { }
       public void	mouseReleased(MouseEvent e)
       {
-         processmouse(e);
+         mb = 0;
+      }
+      public void	mousePressed(MouseEvent e)
+      {
+         mb = e.getButton();
+         processmouse(e,mb);
+      }
+      public void mouseMoved(MouseEvent e)  { }
+      public void mouseDragged(MouseEvent e)
+      {
+         processmouse(e,mb);  
       }
    }
 
