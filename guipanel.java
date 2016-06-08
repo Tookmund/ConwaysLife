@@ -16,6 +16,7 @@ public class guipanel extends JPanel
    private String rulefile;               // Name of rulefile
    private String message;                // Message to print to screen
    private byte mestime;                  // How long (in number of repaints) to display message
+   private boolean matrix;                // Which backend to use (true for sparse, false for array)
    
    public guipanel()
    {
@@ -31,6 +32,7 @@ public class guipanel extends JPanel
       addMouseMotionListener(m);
       border = false;
       one = false;
+      matrix = true;
       t.start();
    }
    @Override
@@ -100,7 +102,8 @@ public class guipanel extends JPanel
                              "b - Toggle cell borders",
                              "./> - Advance one generation at a time",
                              ",/< - Automatically advance generations",
-                             "e - Change ruleset" };
+                             "e - Change ruleset",
+                             "a - Switch backend" };
       for (int i = 0; i < controls.length; i++)
       {
          g.drawString(controls[i],mx,my+(i*20));
@@ -209,6 +212,23 @@ public class guipanel extends JPanel
             }
             con.populate();
             repaint();
+         }
+         else if (c == 'a')
+         {
+            go = false;
+            matrix = !matrix;
+            if (matrix) 
+            {
+               con.SparseMatrix();
+               setMessage("SparseMatrix");
+            }
+            else 
+            {
+               con.ArrayMatrix();
+               setMessage("ArrayMatrix");
+            }
+            con.populate();
+            go = true;
          }
    }
    // pre: e is the MouseEvent passed to a mouselistener

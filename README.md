@@ -36,3 +36,4 @@ b - Toggle cell borders
 ./> - Advance one generation at a time  
 ,/< - Automatically advance generations  
 e - Change ruleset  
+a - Switch backend  
