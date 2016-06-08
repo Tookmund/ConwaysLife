@@ -125,7 +125,7 @@ public class guipanel extends JPanel
          if (c == 'r')
          {
             go = false;
-            String s = JOptionPane.showInputDialog("Read from File");
+            String s = "saves/"+JOptionPane.showInputDialog("Read from File")+".txt";
             con = concommon.fromFile(s,con.numRows(),con.numColumns(),rulefile);
             if (con.error != null) 
             {
@@ -137,7 +137,7 @@ public class guipanel extends JPanel
          else if (c == 'w')
          {
             go = false;
-            String s = JOptionPane.showInputDialog("Write to File");
+            String s = "saves/"+JOptionPane.showInputDialog("Write to File")+".txt";
             concommon.toFile(con,s);
             if (con.error != null) 
             {
