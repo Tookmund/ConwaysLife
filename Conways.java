@@ -23,6 +23,14 @@ public class Conways
          if (b > 0) rulesValid = false;
       }
    }
+   public void SparseMatrix()
+   {
+      board = new SparseMatrix<life>(numRows(),numColumns());
+   }
+   public void ArrayMatrix()
+   {
+      board = new ArrayMatrix<life>(numRows(),numColumns());
+   }
    // pre: fn is a path to a file in born/survive format
    // post: fills the born and survive arrays
    private byte loadrules(String fn)
