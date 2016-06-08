@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class guipanel extends JPanel
 {
@@ -125,7 +126,11 @@ public class guipanel extends JPanel
          if (c == 'r')
          {
             go = false;
-            String s = "saves/"+JOptionPane.showInputDialog("Read from File")+".txt";
+            JFileChooser fc = new JFileChooser(new File("saves"));
+            int rv = fc.showOpenDialog(this);
+            String s;
+            if (rv == JFileChooser.APPROVE_OPTION) s = "saves/"+fc.getSelectedFile().getName();
+            else return;
             con = concommon.fromFile(s,con.numRows(),con.numColumns(),rulefile);
             if (con.error != null) 
             {
@@ -137,7 +142,11 @@ public class guipanel extends JPanel
          else if (c == 'w')
          {
             go = false;
-            String s = "saves/"+JOptionPane.showInputDialog("Write to File")+".txt";
+            JFileChooser fc = new JFileChooser(new File("saves"));
+            int rv = fc.showSaveDialog(this);
+            String s;
+            if (rv == JFileChooser.APPROVE_OPTION) s = "saves/"+fc.getSelectedFile().getName();
+            else return;
             concommon.toFile(con,s);
             if (con.error != null) 
             {
@@ -184,7 +193,11 @@ public class guipanel extends JPanel
          }
          else if (c == 'e')
          {
-            String newrulefile = "rulesets/"+JOptionPane.showInputDialog("Ruleset")+".txt";
+            JFileChooser fc = new JFileChooser(new File("rulesets"));
+            String newrulefile; 
+            int rv = fc.showOpenDialog(this);
+            if (rv == JFileChooser.APPROVE_OPTION) newrulefile = "rulesets/"+fc.getSelectedFile().getName();
+            else return;
             con = new Conways(con.numRows(),con.numColumns(),newrulefile);
             if (con.rulesValid && newrulefile != null) rulefile = newrulefile;
             else 
