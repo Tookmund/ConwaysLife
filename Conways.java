@@ -14,6 +14,8 @@ public class Conways
    // If there was an error when using the conways object
    public String error;
 
+   // pre: r is the number of rows, c is the number of columns and c is a rulefile name
+   // post; Creates a Conways object, setting rulesValid to false if the rulefile is invalid
    public Conways(int r, int c, String rules)
    {
       board = new SparseMatrix<life>(r,c);
@@ -23,10 +25,12 @@ public class Conways
          if (b > 0) rulesValid = false;
       }
    }
+   // post: Creates a new board of type SparseMatrix
    public void SparseMatrix()
    {
       board = new SparseMatrix<life>(numRows(),numColumns());
    }
+   // post: Creates a new board of type ArrayMatrix
    public void ArrayMatrix()
    {
       board = new ArrayMatrix<life>(numRows(),numColumns());
@@ -39,7 +43,6 @@ public class Conways
       FileInputStream rules;
       try 
       {
-         
          rulesfile = new File(fn);
          rules = new FileInputStream(rulesfile);
       }
