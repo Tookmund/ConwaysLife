@@ -1,5 +1,5 @@
 // Created to test the difference between SparseMatrix and standard Array
-// Not used
+
 public class ArrayMatrix<anyType> implements Matrixable<anyType>, Cloneable
 {
       private Object[][] ar;
