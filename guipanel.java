@@ -125,7 +125,7 @@ public class guipanel extends JPanel
    }
    // pre: c is the char of a key that has been pressed
    // post: Acts upon the keypress
-   // See README for what it should do
+   // See README or controls variable for what it should do
    public void processkeys(char c)
    {
          if (c == 'r')
@@ -245,6 +245,8 @@ public class guipanel extends JPanel
          else if (b == 3) con.set(mouseR,mouseC,null);
       }
    }
+   // pre: m is a message to print to the screen
+   // post: message and mestime are set to appropriate values
    private void setMessage(String m)
    {
       message = m;
@@ -252,6 +254,7 @@ public class guipanel extends JPanel
    }
    public static class mouselisten implements MouseListener,MouseMotionListener
    {
+      // int to store mouse button
       private int mb = 0;
       public void mouseClicked(MouseEvent e) { }
       public void	mouseEntered(MouseEvent e) { }
