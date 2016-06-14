@@ -140,7 +140,10 @@ public class Conways
                // Genius idea by Sam Scheele to easily implement wraparound
                if(b.get(row%numRows(),col%numColumns()) != null) total++;
             }
-            if (b.get(row,col) != null) total++;
+            else
+            {
+               if (b.get(row,col) != null) total++;
+            }
          }
       }
       return total;
