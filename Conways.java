@@ -137,12 +137,21 @@ public class Conways
             if (row == r && col == c) continue;
             if (wraparound)
             {
-               // Genius idea by Sam Scheele to easily implement wraparound
-               if(b.get(row%numRows(),col%numColumns()) != null) total++;
+               int rm = row%numRows();
+               int cm = col%numColumns();
+               // Ensure indices are within bounds
+               if (rm >= 0 && rm < numRows() && cm >= 0 && cm < numColumns())
+               {
+                  // Genius idea by Sam Scheele to easily implement wraparound
+                  if(b.get(row%numRows(),col%numColumns()) != null) total++;
+               }
             }
             else
             {
-               if (b.get(row,col) != null) total++;
+               if (row >= 0 && row < numRows() && col >= 0 && col < numColumns())
+               {
+                  if (b.get(row,col) != null) total++;
+               }
             }
          }
       }
