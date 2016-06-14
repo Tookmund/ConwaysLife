@@ -130,44 +130,17 @@ public class Conways
    {
       // Check all eight neighbors
       int total = 0;
-      // The rows to be checked
-      int[] rows = {r-1,r,r+1};
-      // The columns to be checked
-      int[] cols = {c-1,c,c+1};
-      // If there is nothing to the left check to the right
-      // and vice versa
-      if (rows[0] < 0) 
+      for (int row = r-1; row <=r+1; row++)
       {
-         if (wraparound) rows[0] = b.numRows()-1;
-         else rows[0] = -1;
-      }
-      if (rows[2] >= b.numRows()) 
-      {
-         if (wraparound) rows[2] = 0;
-         else rows[2] = -1;
-      }
-      if (cols[0] < 0) 
-      {
-         if (wraparound) cols[0] = b.numColumns()-1;
-         else cols[0] = -1;
-      }
-      if (cols[2] >= b.numRows()) 
-      {
-         if(wraparound) cols[2] = 0;
-         else cols[2] = -1;
-      }
-      life l;
-      for (int i = 0; i < rows.length; i++)
-      {
-         for (int j = 0; j < cols.length; j++)
+         for (int col = c-1; col <= c+1; col++)
          {
-            if (rows[i] != -1 && cols[i] != -1) l = b.get(rows[i],cols[j]);
-            else continue;
-            if (l != null) 
+            if (row == r && col == c) continue;
+            if (wraparound)
             {
-            if (rows[i] == r && cols[j] == c) continue;
-               total++;
+               // Genius idea by Sam Scheele to easily implement wraparound
+               if(b.get(row%numRows(),col%numColumns()) != null) total++;
             }
+            if (b.get(row,col) != null) total++;
          }
       }
       return total;
