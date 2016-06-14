@@ -106,7 +106,7 @@ public class guipanel extends JPanel
       // Draw Controls
       g.setFont(new Font("Serif", Font.BOLD, 20));
       g.setColor(Color.BLACK);
-      int mx = x+2;
+      int mx = x+10;
       int my = y+20;
       String [] controls = { "Controls",
                              "space - Start/stop simulation",
@@ -296,17 +296,7 @@ public class guipanel extends JPanel
          mb = e.getButton();
          processmouse(e,mb);
       }
-      public void mouseMoved(MouseEvent e)  
-      {
-         int mouseR = (e.getY()/size);
-         int mouseC = (e.getX()/size);
-         if(mouseR >=0 && mouseC >= 0 && mouseR < con.numRows() && mouseC < con.numColumns())
-         {
-            
-            if (con.get(mouseR,mouseC) != null) System.out.println(mouseR+","+mouseC+":"+con.livingNeighbors(mouseR,mouseC));
-         }
-
-      }
+      public void mouseMoved(MouseEvent e)  { }
       public void mouseDragged(MouseEvent e)
       {
          processmouse(e,mb);  
