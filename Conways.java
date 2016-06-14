@@ -6,7 +6,7 @@ import java.io.*;
 public class Conways 
 {
    private Matrixable<life> board;
-   private boolean wraparound = false;
+   private boolean wraparound = true;
    private Integer[] born = {3};
    private Integer[] survive = {2,3};
    // If the rulefile passed to the constructor is valid
