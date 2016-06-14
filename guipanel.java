@@ -17,6 +17,7 @@ public class guipanel extends JPanel
    private String message;                // Message to print to screen
    private byte mestime;                  // How long (in number of repaints) to display message
    private boolean matrix;                // Which backend to use (true for sparse, false for array)
+   private byte viewmode;                 // How to render cells. 0 for color, 1 for allblack, 2 for gradients
    
    public guipanel()
    {
@@ -33,6 +34,7 @@ public class guipanel extends JPanel
       border = false;
       one = false;
       matrix = true;
+      viewmode = 0;
       t.start();
    }
    @Override
@@ -48,21 +50,38 @@ public class guipanel extends JPanel
          for (int c = 0; c < con.numColumns(); c++)
          {
             n = con.livingNeighbors(r,c);
-            if(con.get(r,c) == null)
+            if (viewmode == 0) // color
             {
-               if(con.isBorn(n))
+               if(con.get(r,c) == null && viewmode == 0)
                {
-                  g.setColor(Color.GREEN);
+                  if(con.isBorn(n))
+                  {
+                     g.setColor(Color.GREEN);
+                  }
+                  else g.setColor(Color.WHITE);
                }
+               else
+               {
+                  if(con.isSurvive(n))
+                  {
+                     g.setColor(Color.BLACK);
+                  }
+                  else g.setColor(Color.RED);
+               }
+            }
+            else if (viewmode == 1) // all black
+            {
+               if (con.get(r,c) != null) g.setColor(Color.BLACK);
                else g.setColor(Color.WHITE);
             }
-            else 
+            else if (viewmode == 2) // gradient
             {
-               if(con.isSurvive(n))
+               if (con.get(r,c) != null)
                {
-                  g.setColor(Color.BLACK);
+                  int rgb = (250/8)*n;
+                  g.setColor(new Color(rgb,rgb,rgb));
                }
-               else g.setColor(Color.RED);
+               else g.setColor(Color.WHITE);
             }
             g.fillRect(x,y,size,size);
             if (border)
@@ -103,7 +122,8 @@ public class guipanel extends JPanel
                              "./> - Advance one generation at a time",
                              ",/< - Automatically advance generations",
                              "e - Change ruleset",
-                             "a - Switch backend" };
+                             "a - Switch backend",
+                             "t - Toggle viewmode" };
       for (int i = 0; i < controls.length; i++)
       {
          g.drawString(controls[i],mx,my+(i*20));
@@ -230,6 +250,14 @@ public class guipanel extends JPanel
             con.populate();
             go = true;
          }
+         else if (c == 't')
+         {
+            if (viewmode >= 2) viewmode = 0;
+            else viewmode++;
+            if (viewmode == 0) setMessage("Color");
+            else if (viewmode == 1) setMessage("All Black");
+            else if (viewmode == 2) setMessage("Gradient");
+         }
    }
    // pre: e is the MouseEvent passed to a mouselistener
    // post: Adds a cell at the mouse location if left-clicked (1)
@@ -268,7 +296,17 @@ public class guipanel extends JPanel
          mb = e.getButton();
          processmouse(e,mb);
       }
-      public void mouseMoved(MouseEvent e)  { }
+      public void mouseMoved(MouseEvent e)  
+      {
+         int mouseR = (e.getY()/size);
+         int mouseC = (e.getX()/size);
+         if(mouseR >=0 && mouseC >= 0 && mouseR < con.numRows() && mouseC < con.numColumns())
+         {
+            
+            if (con.get(mouseR,mouseC) != null) System.out.println(mouseR+","+mouseC+":"+con.livingNeighbors(mouseR,mouseC));
+         }
+
+      }
       public void mouseDragged(MouseEvent e)
       {
          processmouse(e,mb);  

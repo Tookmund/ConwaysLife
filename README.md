@@ -37,3 +37,4 @@ b - Toggle cell borders
 ,/< - Automatically advance generations  
 e - Change ruleset  
 a - Switch backend  
+t - Toggle viewmode  
