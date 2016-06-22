@@ -135,17 +135,15 @@ public class Conways
          for (int col = c-1; col <= c+1; col++)
          {
             if (row == r && col == c) continue;
-            if (wraparound)
+            else if (wraparound)
             {
-               int oldrow = row;
-               int oldcol = col;
-               if (row == 0) row = (numColumns()-1);
-               else if (row == (numRows()-1)) row = 0;
-               if (col == 0) col = (numColumns()-1);
-               else if (col == (numColumns()-1)) col = 0;
-               if (b.get(row,col) != null) total++;
-               row = oldrow;
-               col = oldcol;
+               int rowc = row;
+               int colc = col;
+               if (row == -1) rowc = (numRows()-1);
+               else if (row == numRows()) rowc = 0;
+               if (col == -1) colc = (numColumns()-1);
+               else if (col == numColumns()) colc = 0;
+               if (b.get(rowc,colc) != null) total++;
             }
             else
             {
